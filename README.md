@@ -1,6 +1,11 @@
+# package-macos
+
+These scripts package an application from homebrew as a .app that users can
+download.
+
 ## Tasks
 
-1. build stack from homebrew to a prsivate prefix
+1. copy stack of libraries from homebrew to a private prefix
 
 2. package into .app with plist, a start script, icon, metadata, etc.
 
@@ -21,7 +26,7 @@ Test with:
 
 ## Package
 
-Copy build/ and run.sh into exe.app.
+Make a .app directory tree from the build/ area
 
     rm -rf nip4.app/
     ./package.sh build nip4
