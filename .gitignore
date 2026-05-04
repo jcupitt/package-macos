@@ -2,4 +2,5 @@ build/
 tmp/
 *.app
 .*.swp
+.DS_Store
 

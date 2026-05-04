@@ -37,11 +37,62 @@ macos code signing tips
 
     https://www.reddit.com/r/macosprogramming/comments/1rpe0mx/macos_app_development_outside_of_app_store/
 
+
+### Certificates
+
+Install xcode to get the current intermediate signing certificates on your
+keychain.
+
+In the System area in Keychain Access, you should see three certs:
+
+- Worldwide Developer Relations Certificate Authority (Expiring 02/20/2030)
+- Worldwide Developer Relations - G4 (Expiring 12/10/2030)
+- Developer ID - G2 (Expiring 09/17/2031)
+
+You also need a pair of personal certs, see: 
+
+    https://developer.apple.com/help/account/certificates/certificates-overview
+
+- **Developer ID Application** Sign a Mac app before distributing it 
+  outside the Mac App Store.
+
+- **Developer ID Installer** Sign and distribute a Mac Installer Package, 
+  containing your signed app, outside the Mac App Store.
+
+To create these, see:
+
+    https://developer.apple.com/help/account/certificates/create-developer-id-certificates
+
+- start "keychain access"
+
+- select the top bar menu Keychain Access > Certificate Asssistant > Request
+  Certificate
+
+- fill out the form, save to disc
+
+Upload here:
+
+    https://developer.apple.com/account/resources/certificates/
+
+Download developerID_installer.cer`, doubleclick to install, should appear in
+My Certificates in Keychain Access under "login".
+
+Upload again and generate `developerID_application.cer`, doubleclick to
+install, check Keychain Access again.
+
+## Signing
+
+Put your cert names into sign.sh and run with eg.:
+
+    ./sign.sh nip4
+
+
+
 Sign the app:
 
     codesign --deep --force --verify --verbose \
         --options runtime \
-        --sign "Developer ID Application: Your Name (TEAMID)" \
+        --sign "Developer ID Application: John Cupitt (64AS5FZ57X)" \
         nip4.app
 
 Verify the signature:
