@@ -16,13 +16,13 @@ codesign --deep --force --verify --verbose \
     --sign "$devid_app" \
     $app.app
 
-if [ ! codesign --verify --deep --strict --verbose=2 $app.app ]; then
+if ! codesign --verify --deep --strict --verbose=2 $app.app; then
   echo codesign verify failed
   exit 1
 fi
 
 # check gatekeeper locally
-if [ ! spctl --assess --type execute -vv nip4.app ]; then
+if ! spctl --assess --type execute -vv nip4.app; then
   echo gatekeeper failed
   exit 1
 fi
